@@ -1,0 +1,78 @@
+package com.sevenrmartsupermarket.pages;
+
+import java.io.FileInputStream;
+import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import com.sevenrmartsupermarket.constants.Constants;
+import com.sevenrmartsupermarket.utilities.WaitUtility;
+
+public class LoginPage {
+	WebDriver driver;
+	Properties properties = new Properties();
+	@FindBy(xpath = "//input[@name='username']")
+	private WebElement userNameField;
+	@FindBy(xpath = "//input[@name='password']")
+	private WebElement passWordField;
+	@FindBy(xpath = "//button[contains(text(),'Sign In')]")
+	private WebElement signInButon;
+
+	public LoginPage(WebDriver driver)
+	{
+		this.driver=driver;
+		PageFactory.initElements(driver, this); 
+		try
+
+		{
+			FileInputStream fi = new FileInputStream(Constants.CONFIG_FILEPATH);
+			properties.load(fi);
+
+		}catch(
+		Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		
+	}
+	
+	public void enterUserName(String userName)
+	{
+	userNameField.sendKeys(userName);
+	}
+
+	public void enterPassWord(String passWord)
+	{
+		passWordField.sendKeys(passWord);
+	}
+
+	public void clickOnSignIn()
+	{
+		WaitUtility waitutility=new WaitUtility(driver);
+		waitutility.elementToBeClickable(signInButon, 60);
+		signInButon.click();
+		
+	}
+
+	public void login(String userName, String passsWord)
+	{
+		enterUserName(userName);
+		enterPassWord(passsWord);
+		clickOnSignIn();
+	}
+
+	public void login() 
+	{
+		String userName = properties.getProperty("username");
+		String passWord = properties.getProperty("password");
+		enterUserName(userName);
+		enterPassWord(passWord);
+		clickOnSignIn();
+		
+	}
+}
+
