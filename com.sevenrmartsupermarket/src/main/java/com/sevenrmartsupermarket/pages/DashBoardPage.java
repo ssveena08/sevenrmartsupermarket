@@ -15,21 +15,16 @@ public class DashBoardPage {
 	public DashBoardPage(WebDriver driver)
 	{
 		this.driver=driver;
-		PageFactory.initElements(driver, this); 
-		
+		PageFactory.initElements(driver, this); 		
 	}
-	
 	public String getProfileName()
 	{
 		return profileNameElement.getText();
 	}
-	
 	  public String getPageTitle() 
 	  {
 	        return driver.getTitle();
-	    }
-	
-	  
+	   }  
 	  public void clickOnAdminMoreInfo1()
 		{
 			
