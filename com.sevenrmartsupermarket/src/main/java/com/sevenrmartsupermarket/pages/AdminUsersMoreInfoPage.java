@@ -1,20 +1,21 @@
 package com.sevenrmartsupermarket.pages;
 
-import java.time.Duration;
 
-import org.openqa.selenium.By;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+
+import com.sevenrmartsupermarket.utilities.PageUtility;
 
 public class AdminUsersMoreInfoPage {
 
 	WebDriver driver;
+	DashBoardPage dashboardpage;
 	@FindBy(xpath="(//a[@class='small-box-footer'])[1]")
 	private WebElement MoreInfobutton;
 	@FindBy(xpath="(//span[text()='Active'])[1]")
@@ -29,6 +30,8 @@ public class AdminUsersMoreInfoPage {
 	private WebElement SelectType;
 	@FindBy(xpath="//button[@name='Create']")
 	private WebElement Save;
+	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
+	private WebElement successfulUserCreationAlert;
 	
 	
 	
@@ -46,19 +49,20 @@ public class AdminUsersMoreInfoPage {
 		
 	}
 	
-	public void createNewUser()
+	public String createNewUser(String userName,String passWord,String type)
 	{
 		
-		MoreInfobutton.click();
+		PageUtility pageutility=new PageUtility(driver);
+		Select select=new Select(SelectType);
+		dashboardpage=new DashBoardPage(driver);
+		
 		AddUser.click();
-		WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(30));
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h3[contains(text(),'Admin Users Informations')]")));
-		NewUserName.sendKeys("Lanka");
-		NewPassword.sendKeys("Lanka");
-		Select select =new Select(SelectType);
-		SelectType.click();
-      	select.selectByValue("Staff");
-      	Save.click();
+		NewUserName.click();
+		NewUserName.sendKeys(userName);
+		NewPassword.sendKeys(passWord);
+		pageutility.selectByVissibleText(SelectType,type);
+		Save.click();
+		return successfulUserCreationAlert.getText();
 		
 	}
 	

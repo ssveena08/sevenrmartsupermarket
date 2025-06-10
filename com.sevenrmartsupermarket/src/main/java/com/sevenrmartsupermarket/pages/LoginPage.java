@@ -40,38 +40,41 @@ public class LoginPage {
 		
 	}
 	
-	public void enterUserName(String userName)
+	public LoginPage enterUserName(String userName)
 	{
 	userNameField.sendKeys(userName);
+	return this;
 	}
 
-	public void enterPassWord(String passWord)
+	public LoginPage enterPassWord(String passWord)
 	{
 		passWordField.sendKeys(passWord);
+		return this;
 	}
 
-	public void clickOnSignIn()
+	public LoginPage clickOnSignIn()
 	{
 		WaitUtility waitutility=new WaitUtility(driver);
 		waitutility.elementToBeClickable(signInButon, 60);
 		signInButon.click();
+		return this;
 		
 	}
 
-	public void login(String userName, String passsWord)
+	public DashBoardPage login(String userName, String passsWord)
 	{
-		enterUserName(userName);
-		enterPassWord(passsWord);
-		clickOnSignIn();
+		enterUserName(userName).enterPassWord(passsWord).clickOnSignIn();
+		return new DashBoardPage(driver);
 	}
 
-	public void login() 
+	public DashBoardPage login() 
 	{
 		String userName = properties.getProperty("username");
 		String passWord = properties.getProperty("password");
 		enterUserName(userName);
 		enterPassWord(passWord);
 		clickOnSignIn();
+		return new DashBoardPage(driver);
 		
 	}
 }

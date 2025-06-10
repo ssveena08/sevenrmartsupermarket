@@ -21,7 +21,7 @@ public class LoginTest extends Base {
 	@Test(retryAnalyzer = RetryAnalyzer.class, groups="smoke")
 	public void verifyValidLogin() {
 		loginpage = new LoginPage(driver);
-		dashboardpage = new DashBoardPage(driver);
+		
 
 		excelreader.setExcelFile("LoginPage");
 		String st = excelreader.getCellData(0, 1);
@@ -29,7 +29,7 @@ public class LoginTest extends Base {
 		String st1 = GeneralUtility.getRandomName();
 		System.out.println(st1);
 
-		loginpage.login("admin", "admin");
+		dashboardpage=loginpage.login("admin", "admin");
 		String actualProfileName = dashboardpage.getProfileName();
 		String expectedProfileName = "Admin";
 		Assert.assertEquals(actualProfileName, expectedProfileName);

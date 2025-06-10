@@ -3,14 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.sevenrmartsupermarket.tests.AdminUsersMoreInfoPageTest">
+      <class name="com.sevenrmartsupermarket.tests.DashBoardTest">
         <methods>
           <include name="launchBrowser"/>
           <include name="launchBrowser"/>
           <include name="terminateBrowser"/>
-          <include name="addNewUser"/>
+          <include name="verifyDashboardTitleIsDisplayed"/>
         </methods>
-      </class> <!-- com.sevenrmartsupermarket.tests.AdminUsersMoreInfoPageTest -->
+      </class> <!-- com.sevenrmartsupermarket.tests.DashBoardTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

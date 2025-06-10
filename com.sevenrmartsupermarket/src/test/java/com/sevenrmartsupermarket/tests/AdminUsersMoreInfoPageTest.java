@@ -5,12 +5,14 @@ import org.testng.annotations.Test;
 
 import com.sevenrmartsupermarket.base.Base;
 import com.sevenrmartsupermarket.pages.AdminUsersMoreInfoPage;
+import com.sevenrmartsupermarket.pages.DashBoardPage;
 import com.sevenrmartsupermarket.pages.LoginPage;
 
 public class AdminUsersMoreInfoPageTest extends Base 
 {
 	AdminUsersMoreInfoPage adminusersmoreinfopage;
 	LoginPage loginpage;
+	DashBoardPage dashboardpage;
 	
 	@Test (groups="regression")
 	public void VerifyBackgroundColor()
@@ -27,13 +29,17 @@ public class AdminUsersMoreInfoPageTest extends Base
 	
 	
 	@Test
-	public void addNewUser()
+	public void verifyNewUserCreation()
 	{
-		loginpage = new LoginPage(driver);
-		loginpage.login("admin", "admin");
 		adminusersmoreinfopage=new AdminUsersMoreInfoPage(driver);
-		adminusersmoreinfopage.createNewUser();
+		dashboardpage=new DashBoardPage(driver);
+		loginpage=new LoginPage(driver);
+		loginpage.login("admin", "admin");
+		dashboardpage.clickOnAdminMoreInfo1();
+		String actualResult=adminusersmoreinfopage.createNewUser("VeenaSS","veena","veena");
 		
+		String expectedResult="×\n"+"Alert!\n"+"User Created Successfully";
+		Assert.assertEquals(actualResult, expectedResult);
 	}
 	}
 	

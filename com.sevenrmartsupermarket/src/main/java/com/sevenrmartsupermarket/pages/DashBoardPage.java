@@ -10,6 +10,8 @@ public class DashBoardPage {
 	WebDriver driver;
 	@FindBy(xpath="//a[@class='d-block']")
 	private WebElement profileNameElement;
+	@FindBy(xpath="//div[@class='small-box bg-info']//a[@href='https://groceryapp.uniqassosiates.com/admin/list-admin']")
+	private WebElement adminMoreinfo;
 	public DashBoardPage(WebDriver driver)
 	{
 		this.driver=driver;
@@ -27,5 +29,13 @@ public class DashBoardPage {
 	        return driver.getTitle();
 	    }
 	
+	  
+	  public void clickOnAdminMoreInfo1()
+		{
+			
+			adminMoreinfo.click();
+		}
+	  
+	  
 	
 }
